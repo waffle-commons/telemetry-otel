@@ -1,16 +1,17 @@
 {
-    "name": "waffle-commons/{COMPONENT_NAME}",
-    "description": "{COMPONENT_NAME} component for Waffle framework.",
+    "name": "waffle-commons/telemetry-otel",
+    "description": "OpenTelemetry SDK bridge for Waffle Commons: implements the framework TracerInterface with W3C trace-context propagation, keeping the OTel SDK out of the core perimeter.",
+    "version": "1.0.0-dev",
     "type": "library",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Waffle\\Commons\\{COMPONENT_NAME}\\": "src/"
+            "Waffle\\Commons\\TelemetryOtel\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "WaffleTests\\Commons\\{COMPONENT_NAME}\\": "tests/src/"
+            "WaffleTests\\Commons\\TelemetryOtel\\": "tests/src/"
         }
     },
     "authors": [
@@ -22,7 +23,9 @@
     "minimum-stability": "stable",
     "require": {
         "php": "^8.5",
-        "waffle-commons/contracts": "self.version"
+        "waffle-commons/contracts": "self.version",
+        "open-telemetry/api": "^1.0",
+        "open-telemetry/sdk": "^1.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^12.5",
@@ -57,10 +60,10 @@
             "@tests"
         ],
         "ci": [
-          "@mago",
-          "@tests",
-          "composer audit",
-          "vendor/bin/psalm --taint-analysis"
+            "@mago",
+            "@tests",
+            "composer audit",
+            "vendor/bin/psalm --taint-analysis"
         ]
     },
     "config": {
@@ -68,5 +71,15 @@
             "carthage-software/mago": true,
             "cyclonedx/cyclonedx-php-composer": true
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../contracts",
+            "canonical": false,
+            "options": {
+                "symlink": false
+            }
+        }
+    ]
 }
