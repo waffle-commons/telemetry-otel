@@ -1,7 +1,6 @@
 {
     "name": "waffle-commons/telemetry-otel",
     "description": "OpenTelemetry SDK bridge for Waffle Commons: implements the framework TracerInterface with W3C trace-context propagation, keeping the OTel SDK out of the core perimeter.",
-    "version": "1.0.0-dev",
     "type": "library",
     "license": "MIT",
     "autoload": {

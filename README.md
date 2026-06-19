@@ -12,9 +12,19 @@ OpenTelemetry SDK bridge for the [Waffle Commons](https://github.com/waffle-comm
 **W3C Trace Context** on outbound HTTP calls — isolating the vendor SDK in this adapter so the core packages
 stay vendor-free.
 
-> **Status:** scaffolding for **Beta 5 / AXE 5 (RFC-005)** — no implementation yet. The SDK-free defaults, the
-> Prometheus endpoint and the metric collectors live in
-> [`waffle-commons/telemetry`](https://github.com/waffle-commons/telemetry).
+> **Status:** shipped in **Beta 5 / AXE 5 (RFC-005)**. The SDK-free defaults, the Prometheus endpoint and the
+> metric collectors live in [`waffle-commons/telemetry`](https://github.com/waffle-commons/telemetry).
+
+## What's inside
+
+- **Tracer adapters** — `Trace\OtelTracer`, `Trace\OtelSpan` and `Trace\OtelSpanContext` adapt the OpenTelemetry
+  SDK to the framework's `Contracts\Telemetry\TracerInterface` / `SpanInterface` / `SpanContextInterface`. The
+  SDK owns the active-context stack, so the adapters hold no per-request worker state.
+- **W3C propagation** — `Propagation\W3CTraceContextPropagator` injects / extracts `traceparent` + `tracestate`,
+  enabling transparent distributed tracing across services.
+- **Factory** — `Factory\OtelTracerFactory` assembles a tracer from any `SpanExporterInterface` (or a console
+  JSON exporter for local `docker logs` inspection), keeping every `OpenTelemetry\SDK\*` symbol out of the core
+  perimeter.
 
 ## Perimeter
 
