@@ -1,13 +1,12 @@
 name: Waffle Granular Pipeline
 
-on: workflow_dispatch
-# Uncomment this to activate the workflow on a new component
-#  push:
-#    branches:
-#      - main
-#    tags:
-#      - '*'
-#  pull_request:
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - '*'
+  pull_request:
 
 jobs:
   prepare:
@@ -228,7 +227,9 @@ jobs:
       - uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-version }}
-          extensions: gd, pgsql, pdo_mysql, pdo_pgsql, gmp, fileinfo, intl, opcache, xml, iconv, redis, mailparse
+          # OTel bridge: no APCu here (it holds no metric store — that lives in waffle-commons/telemetry).
+          # gmp is kept because the OpenTelemetry SDK suggests it; json/mbstring/ctype ship in the base build.
+          extensions: gmp, fileinfo, intl, opcache, xml, iconv
           coverage: xdebug
           tools: composer:v2
       - uses: actions/cache@v5
