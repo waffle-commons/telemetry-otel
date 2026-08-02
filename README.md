@@ -8,7 +8,7 @@
 Waffle Telemetry — OpenTelemetry Bridge
 =========================================
 
-> **Release:** `0.1.0-beta5` &nbsp;|&nbsp; [`CHANGELOG.md`](./CHANGELOG.md)
+> **Release:** `0.1.0-beta6` &nbsp;|&nbsp; [`CHANGELOG.md`](./CHANGELOG.md)
 > **RFC:** RFC-005 (`OBS-02`) — OpenTelemetry SDK bridge
 
 OpenTelemetry SDK bridge for the [Waffle Commons](https://github.com/waffle-commons) framework. It implements
