@@ -27,6 +27,8 @@ psr = ["Psr\\**"]
 [[guard.perimeter.rules]]
 namespace = "Waffle\\Commons\\TelemetryOtel"
 permit = [
+    # Worker-safety audit tooling (igor-php): dev-only #[WorkerSafe] metadata, inert at runtime.
+    "IgorPhp\\IgorBundle\\Attribute\\**",
     "Waffle\\Commons\\TelemetryOtel\\**",
     "Waffle\\Commons\\Contracts\\**",
     # This adapter is the ONLY waffle package permitted to touch the OTel SDK.
