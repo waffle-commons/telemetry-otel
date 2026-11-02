@@ -8,7 +8,7 @@ Released in lockstep with the Waffle Commons umbrella tag.
 ## [0.1.0-beta7] — 2026-11
 
 ### Changed
-- Lockstep version bump with the Beta-7 wave. No behavioural changes in this component since `0.1.0-beta6`. Development only: the toolchain moved to mago 1.50, psalm 6.19 and igor-php 0.9.7, and `phpunit.xml` now validates against the installed PHPUnit schema.
+- Lockstep version bump with the Beta-7 wave. No behavioural changes in this component since `0.1.0-beta6`. Development only: the toolchain moved to mago 1.59, psalm 6.20 and igor-php 0.10.1, and `phpunit.xml` now validates against the installed PHPUnit schema.
 - igor-php 0.9.7's new findings on `OtelSpan::setAttribute()`, `OtelSpan::setStatus()` and `OtelTracer::startSpan()` are adjudicated with a method-level `#[WorkerSafe]` stating why nothing survives the request; the `mago guard` perimeter permits `IgorPhp\IgorBundle\Attribute\**` (development metadata). No behavioural change.
 
 ## [0.1.0-beta6] — 2026-09
