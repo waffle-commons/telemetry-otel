@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Waffle\Commons\TelemetryOtel\Trace;
 
+use IgorPhp\IgorBundle\Attribute\WorkerSafe;
 use OpenTelemetry\API\Trace\Span as OtelSpanFacade;
 use OpenTelemetry\API\Trace\SpanContext as OtelApiSpanContext;
 use OpenTelemetry\API\Trace\SpanKind as OtelSpanKind;
@@ -33,6 +34,7 @@ final readonly class OtelTracer implements TracerInterface
     ) {}
 
     #[\Override]
+    #[WorkerSafe(reason: 'builds a new span through the injected SDK tracer; the span builder is local to this call')]
     public function startSpan(
         string $name,
         SpanKind $kind = SpanKind::Internal,

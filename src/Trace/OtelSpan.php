@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Waffle\Commons\TelemetryOtel\Trace;
 
+use IgorPhp\IgorBundle\Attribute\WorkerSafe;
 use OpenTelemetry\API\Trace\SpanInterface as OtelSpanInterface;
 use OpenTelemetry\API\Trace\StatusCode;
 use OpenTelemetry\Context\ScopeInterface;
@@ -24,6 +25,9 @@ final readonly class OtelSpan implements SpanInterface
     ) {}
 
     #[\Override]
+    #[WorkerSafe(
+        reason: 'per-span wrapper built by OtelTracer::startSpan for one operation; writing to its own SDK span is its purpose',
+    )]
     public function setAttribute(string $key, string|int|float|bool $value): void
     {
         if ($key !== '') {
@@ -38,6 +42,9 @@ final readonly class OtelSpan implements SpanInterface
     }
 
     #[\Override]
+    #[WorkerSafe(
+        reason: 'per-span wrapper built by OtelTracer::startSpan for one operation; writing to its own SDK span is its purpose',
+    )]
     public function setStatus(SpanStatus $status): void
     {
         $this->span->setStatus(match ($status) {
